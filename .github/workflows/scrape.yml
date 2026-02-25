@@ -1,0 +1,21 @@
+name: Scrape Table Sums
+
+on:
+  workflow_dispatch:   # Lets you run it manually with a button
+  push:
+    branches: [main]   # Also runs automatically when you push code
+
+jobs:
+  scrape:
+    runs-on: ubuntu-latest   # Uses a free Linux computer from GitHub
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # ⬇️ This step MUST contain your email address — it's how the grader finds it
+      - name: Run Playwright scraper - 23f1000170@ds.study.iitm.ac.in
+        run: |
+          npm install playwright
+          npx playwright install chromium --with-deps
+          node scrape.js
